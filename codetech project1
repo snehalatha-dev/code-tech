@@ -1,0 +1,98 @@
+HTML 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1 class="animate-text">Hi, I'm Snehalatha</h1>
+    <p class="animate-text">A Passionate Web Developer</p>
+  </header>
+
+  <section class="projects">
+    <div class="project-card animate-card">Project 1</div>
+    <div class="project-card animate-card">Project 2</div>
+    <div class="project-card animate-card">Project 3</div>
+  </section>
+
+  <footer class="animate-text">
+    © 2025 Karnam Snehalatha
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+CSS 
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  text-align: center;
+}
+
+header {
+  padding: 50px 20px;
+  background: linear-gradient(to right, #1e90ff, #00bfff);
+  color: white;
+}
+
+.projects {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 50px 20px;
+}
+
+.project-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 40px;
+  width: 200px;
+  font-size: 1.2em;
+}
+
+footer {
+  padding: 30px;
+  background: #1e90ff;
+  color: white;
+}
+
+
+JavaScript 
+
+// GSAP animations
+gsap.from(".animate-text", {
+  opacity: 0,
+  y: -50,
+  duration: 1,
+  stagger: 0.3
+});
+
+gsap.from(".animate-card", {
+  opacity: 0,
+  scale: 0.8,
+  duration: 1,
+  delay: 1,
+  stagger: 0.2
+});
+
+
+✅ Output Preview:
+
+
+Animated text fade-in from top
+
+Project cards zoom-in one by one
+
+Smooth transitions using GSAP
