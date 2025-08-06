@@ -1,0 +1,105 @@
+📝 index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collaborative Editor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>📝 Real-Time Document Editor</h1>
+  <textarea id="editor" placeholder="Start typing..."></textarea>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <!-- Your Firebase config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR-API-KEY",
+      authDomain: "YOUR-PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR-PROJECT.firebaseio.com",
+      projectId: "YOUR-PROJECT",
+      storageBucket: "YOUR-PROJECT.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+---
+
+🎨 style.css
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f3f3f3;
+  text-align: center;
+}
+
+h1 {
+  background: #007acc;
+  color: white;
+  padding: 20px;
+}
+
+textarea {
+  width: 90%;
+  height: 400px;
+  margin: 20px auto;
+  display: block;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+
+---
+
+⚙ script.js
+
+const db = firebase.database();
+const docRef = db.ref("documents/main");
+
+const editor = document.getElementById("editor");
+
+// Update DB when typing
+editor.addEventListener("input", () => {
+  docRef.set(editor.value);
+});
+
+// Listen to DB for changes
+docRef.on("value", (snapshot) => {
+  const data = snapshot.val();
+  if (data !== editor.value) {
+    editor.value = data;
+  }
+});
+
+
+---
+
+✅ Output Features:
+
+Real-time typing across multiple tabs/devices
+
+Easy setup using Firebase
+
+You can enhance it later with:
+
+Authentication
+
+Multiple document support
+
+Rich text editor (e.g., Quill.js)
