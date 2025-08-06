@@ -1,0 +1,130 @@
+📝 index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Learning Platform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📘 LearnHub</h1>
+    <p>Empower Your Learning Journey</p>
+  </header>
+
+  <main>
+    <section class="video-section">
+      <h2>Lesson 1: Introduction to HTML</h2>
+      <video width="320" height="240" controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <section class="quiz-section">
+      <h2>Quick Quiz</h2>
+      <p>What does HTML stand for?</p>
+      <button onclick="checkAnswer('a')">a) Hyper Trainer Marking Language</button>
+      <button onclick="checkAnswer('b')">b) HyperText Markup Language</button>
+      <button onclick="checkAnswer('c')">c) Hyper Transfer Mix Language</button>
+    </section>
+
+    <section class="progress">
+      <h2>Your Progress</h2>
+      <p id="progressStatus">Progress: Not Attempted</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+---
+
+🎨 style.css
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+header {
+  background-color: #007acc;
+  color: white;
+  padding: 20px;
+}
+
+main {
+  padding: 30px;
+}
+
+section {
+  margin: 30px auto;
+  max-width: 500px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background: #007acc;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+
+---
+
+⚙ script.js
+
+function checkAnswer(option) {
+  const progress = document.getElementById("progressStatus");
+  if (option === "b") {
+    localStorage.setItem("quiz1", "passed");
+    progress.textContent = "Progress: ✅ Quiz Passed!";
+    alert("Correct! Great job.");
+  } else {
+    localStorage.setItem("quiz1", "failed");
+    progress.textContent = "Progress: ❌ Quiz Failed. Try again!";
+    alert("Oops! Wrong answer.");
+  }
+}
+
+// Load saved progress on page load
+window.onload = () => {
+  const status = localStorage.getItem("quiz1");
+  const progress = document.getElementById("progressStatus");
+  if (status === "passed") {
+    progress.textContent = "Progress: ✅ Quiz Passed!";
+  } else if (status === "failed") {
+    progress.textContent = "Progress: ❌ Quiz Failed. Try again!";
+  }
+};
+
+
+---
+
+✅ Output Features:
+
+Video lesson player
+
+One-question quiz
+
+Progress tracking stored locally
+
+Fully responsive design
