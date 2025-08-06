@@ -1,0 +1,109 @@
+📝 index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopMate - PWA</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🛒 ShopMate</h1>
+  <div class="products">
+    <div class="product">Product 1 - ₹100</div>
+    <div class="product">Product 2 - ₹200</div>
+    <div class="product">Product 3 - ₹150</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+---
+
+🎨 style.css
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7f7f7;
+  text-align: center;
+  padding: 20px;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.product {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+---
+
+⚙ app.js
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log('✅ Service Worker Registered'))
+    .catch(err => console.log('❌ SW registration failed:', err));
+}
+
+
+---
+
+📦 manifest.json
+
+{
+  "name": "ShopMate",
+  "short_name": "ShopMate",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007acc",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/263/263142.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
+
+
+---
+
+🔌 sw.js (Service Worker)
+
+const cacheName = "shopmate-v1";
+const filesToCache = [
+  "/",
+  "/index.html",
+  "/style.css",
+  "/app.js"
+];
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(cacheName).then((cache) => {
+      return cache.addAll(filesToCache);
+    })
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
